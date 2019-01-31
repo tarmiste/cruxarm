@@ -1,0 +1,20 @@
+# Description: vboot tools 
+# URL:         
+# Maintainer:  TBA
+# 
+
+name=vboot-utils
+version=R63-10032
+release=1
+source=(vboot_reference.tar.gz,
+  0001-Remove-static-futility.patch )
+
+build() {
+    cd vboot_reference
+
+    cat ../0001-Remove-static-futility.patch |patch -Np1
+    # remove -Werror to prevent build failure
+    sed -i 's/-Werror//g' Makefile
+    ARCH=arm make V=1
+    make DESTDIR="${PKG}/usr" install
+}

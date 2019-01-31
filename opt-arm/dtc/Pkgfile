@@ -11,5 +11,5 @@ source=(https://mirror.umd.edu/kernel.org/software/utils/dtc/dtc-1.4.7.tar.xz)
 build() {
     cd dtc-$version
     make
-    make DESTDIR="${PKG} PREFIX=/usr install
+    make DESTDIR=${PKG} PREFIX=/usr install
 }

@@ -42,13 +42,13 @@ cd linux-$version/
 
   make mrproper
 
-  cat ../config > ./.config
+  cat "${SRC}/config" > ./.config
   make oldconfig
 
   # add pkgrel to extraversion
   sed -ri "s|^(EXTRAVERSION =)(.*)|\1 \2-CRUX|" Makefile
 
-  #make ${MAKEFLAGS} zImage modules dtbs
+  make ${MAKEFLAGS} zImage modules dtbs
 
   cp ../kernel.its .
   mkimage -D "-I dts -O dtb -p 2048" -f kernel.its vmlinux.uimg

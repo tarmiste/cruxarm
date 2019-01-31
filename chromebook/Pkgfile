@@ -8,16 +8,16 @@
 name=kernel
 version=4.20.4
 release=1
-source=(https://mirrors.edge.kernel.org/pub/linux/kernel/v4.x/linux-4.20.4.tar.xz \
-0001-ARM-atags-add-support-for-Marvell-s-u-boot.patch\
-0002-ARM-atags-fdt-retrieve-MAC-addresses-from-Marvell-bo.patch\
-0003-SMILE-Plug-device-tree-file.patch\
-0004-fix-mvsdio-eMMC-timing.patch\
-0005-net-smsc95xx-Allow-mac-address-to-be-set-as-a-parame.patch\
-0006-set-default-cubietruck-led-triggers.patch\
-0007-exynos4412-odroid-set-higher-minimum-buck2-regulator.patch\
-0008-ARM-dove-enable-ethernet-on-D3Plug.patch\
-0009-media-s5p-mfc-fix-incorrect-bus-assignment-in-virtua.patch\
+source=(https://mirrors.edge.kernel.org/pub/linux/kernel/v4.x/linux-4.20.4.tar.xz 
+0001-ARM-atags-add-support-for-Marvell-s-u-boot.patch
+0002-ARM-atags-fdt-retrieve-MAC-addresses-from-Marvell-bo.patch
+0003-SMILE-Plug-device-tree-file.patch
+0004-fix-mvsdio-eMMC-timing.patch
+0005-net-smsc95xx-Allow-mac-address-to-be-set-as-a-parame.patch
+0006-set-default-cubietruck-led-triggers.patch
+0007-exynos4412-odroid-set-higher-minimum-buck2-regulator.patch
+0008-ARM-dove-enable-ethernet-on-D3Plug.patch
+0009-media-s5p-mfc-fix-incorrect-bus-assignment-in-virtua.patch
 patch-4.20.4-armv7-x4.diff.gz 
 config
 kernel.its
@@ -25,9 +25,9 @@ kernel.keyblock
 kernel_data_key.vbprivk )
 
 build() {
-cd $name-$version/
-  gunzip patch-armv7-x4.diff.gz
-  cat ../patch-armv7-x4.diff |patch -Np1
+cd linux-$version/
+  gunzip ../patch-4.20.4-armv7-x4.diff.gz
+  cat ../patch-4.20.4-armv7-x4.diff |patch -Np1
 
   # ALARM patches
   cat ../0001-ARM-atags-add-support-for-Marvell-s-u-boot.patch |patch -Np1
@@ -42,7 +42,8 @@ cd $name-$version/
 
   make mrproper
 
-  cat "${SRC}/config" > ./.config
+  cat ../config > ./.config
+  make oldconfig
 
   # add pkgrel to extraversion
   sed -ri "s|^(EXTRAVERSION =)(.*)|\1 \2-CRUX|" Makefile

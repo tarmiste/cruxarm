@@ -6,8 +6,9 @@
 name=vboot-utils
 version=R63-10032
 release=1
-source=(vboot_reference.tar.gz,
-  0001-Remove-static-futility.patch )
+#source=(vboot_reference.tar.gz \
+#  0001-Remove-static-futility.patch)
+source=(vboot_reference.tar.gz )
 
 build() {
     cd vboot_reference

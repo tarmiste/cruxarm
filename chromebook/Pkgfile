@@ -26,8 +26,8 @@ kernel_data_key.vbprivk )
 
 build() {
 cd linux-$version/
-  gunzip ../patch-4.20.4-armv7-x4.diff.gz
-  cat ../patch-4.20.4-armv7-x4.diff |patch -Np1
+  #gunzip ../patch-4.20.4-armv7-x4.diff.gz
+  zcat ../patch-4.20.4-armv7-x4.diff.gz |patch -Np1
 
   # ALARM patches
   cat ../0001-ARM-atags-add-support-for-Marvell-s-u-boot.patch |patch -Np1
